@@ -151,6 +151,7 @@ Supported source files: `.csv`, `.tsv`, `.txt` (delimiter detected: `,` `;` tab 
 ## More Salesforce QA tools
 
 - **[Salesforce Org Parity – Config Diff for QA](https://marketplace.visualstudio.com/items?itemName=AndrsGarcaRamrez.org-parity-salesforce-qa)** — compare config/metadata between two orgs (sandbox vs prod).
+- **[Salesforce Impact Analyzer – Where Used for QA](https://marketplace.visualstudio.com/items?itemName=AndrsGarcaRamrez.salesforce-impact-analyzer-qa)** — see everything that references a field or object before you change it (Dependency API + source scan, honest coverage).
 
 ## Español
 
