@@ -1,17 +1,30 @@
 # Salesforce Migration Validator – Data Reconciliation for QA
 
-**Did the migration land correctly?** Data Loader, ETL tools and migration platforms *move* data;
-they don't independently check that it arrived intact. Migration Validator compares your **source
-export (CSV or JSON)** with the records in a Salesforce org you're already signed in to with the
-Salesforce CLI, and tells you exactly what is missing, extra, different, truncated or wrongly linked.
+**Did my Salesforce data migration land correctly?**
 
-**Read-only and 100% local.** No backend, no account, no telemetry. Your migration data — often
-customer PII — never leaves your computer. The only network traffic is read requests to your own
-org, using the session the Salesforce CLI already has.
+Migration tools (Data Loader, Jitterbit, Gearset…) **move** data — they don't **independently
+prove** it arrived right. This extension reconciles your **source export (CSV)** against the
+**target org**, field by field, and reports what's missing, extra, truncated, mismatched, or
+has broken lookups.
+
+**100% local · read-only · no backend · no telemetry.** Your migration data (often customer
+PII) **never leaves your machine** — the only network call is to your own org via the Salesforce
+CLI you already use.
+
+Built by a Salesforce QA lead for the exact question every migration raises: *"has everything
+migrated correctly?"*
 
 ![Reconciliation report](media/screenshots/report-en.png)
 
 ## What it checks
+
+- **Counts:** records that are missing (in the source but not in the org) and extra records.
+- **Field by field** with normalisation (trim, upper/lower case, dates, numbers) → no false positives.
+- **Truncation** and type mismatches.
+- **Relationships:** lookups / master-detail resolve to an existing parent.
+- **Exportable report** in Markdown / HTML / CSV to attach to the ticket. English and Spanish.
+
+### Checks in detail
 
 | Group | Checks |
 |---|---|
@@ -33,6 +46,11 @@ org, using the session the Salesforce CLI already has.
 | `G` (map `G=Gold`) | `Gold` | ✅ picklist value map |
 | `b;a` | `a;b` | ✅ multi-select order |
 | `001A0000006Vm9r` | `001A0000006Vm9rIAC` | ✅ 15/18-char Ids |
+
+## Privacy
+
+No cloud. No account. No data upload. The extension runs entirely on your machine and only talks
+to the org you're already authenticated against with the Salesforce CLI.
 
 ## The mapping editor
 
@@ -83,7 +101,7 @@ scratch org: ~8 seconds, 12 API requests.
 Supported source files: `.csv`, `.tsv`, `.txt` (delimiter detected: `,` `;` tab `|`), and `.json`
 (an array of objects, or `{ "records": [...] }`). UTF-8 or Windows-1252. Excel: save as *CSV UTF-8*.
 
-## Privacy & security
+## Security details
 
 - **Read-only.** The extension only sends GET requests, plus the POST that creates a Bulk API *query*
   job. It never creates, updates or deletes records.
@@ -129,6 +147,10 @@ Supported source files: `.csv`, `.tsv`, `.txt` (delimiter detected: `,` `;` tab 
 - VS Code 1.90 or later.
 - Salesforce CLI (`sf`) with the target org authenticated, and a user with *API Enabled* and read
   access to the object and fields.
+
+## More Salesforce QA tools
+
+- **[Salesforce Org Parity – Config Diff for QA](https://marketplace.visualstudio.com/items?itemName=AndrsGarcaRamrez.org-parity-salesforce-qa)** — compare config/metadata between two orgs (sandbox vs prod).
 
 ## Español
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Marketplace listing: new description and keywords, README intro, Privacy section and a link to
+  Org Parity. No functional changes.
+
 ## 0.1.0 — first public version
 
 - Reconcile a source file (CSV/TSV/JSON) against an object in an org authenticated in the Salesforce
